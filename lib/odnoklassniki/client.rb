@@ -70,7 +70,8 @@ module Odnoklassniki
         access_token:    @access_token,
         client_secret:   @client_secret,
         application_key: @application_key,
-        session_key: @session_key
+        session_key: @session_key,
+        proxy: @proxy
       }
     end
 

@@ -11,6 +11,7 @@ module Odnoklassniki
       @client_secret   = credentials[:client_secret]
       @application_key = credentials[:application_key]
       @session_key = credentials[:session_key]
+      @proxy = credentials[:proxy]
     end
 
     # Performs a get request
@@ -28,7 +29,7 @@ module Odnoklassniki
     def perform_request(method, path, params)
       signed_params = signed params
 
-      connection.send(method) do |req|
+      connection(proxy: @proxy).send(method) do |req|
         req.url path
         if method == :get
           req.params = signed_params

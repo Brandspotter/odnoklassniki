@@ -7,6 +7,7 @@ module Odnoklassniki
 
     def connection(options={})
       options = options.clone
+      proxy = options.delete(:proxy)
 
       default_options = {
         :headers => {
@@ -21,6 +22,7 @@ module Odnoklassniki
       Faraday.new(default_options.merge(options)) do |conn|
         conn.request :multipart
         conn.request :url_encoded
+        conn.proxy proxy if proxy
         conn.adapter client
       end
     end
